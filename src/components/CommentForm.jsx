@@ -1,11 +1,11 @@
 import React from 'react';
 
-class Main extends React.Component {
+class CommentForm extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      data: 'single'
+      data: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,4 +27,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default CommentForm;

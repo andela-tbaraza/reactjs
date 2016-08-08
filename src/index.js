@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import Main from './components/Main.jsx';
+import CommentBox from './components/CommentBox.jsx';
 
-ReactDom.render(<Main />, document.getElementById('app')); 
+ReactDom.render(<CommentBox url="https://www.googleapis.com/books/v1/volumes?q=isbn:0747532699" pollInterval={2000} />, document.getElementById('app'));
