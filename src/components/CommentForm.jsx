@@ -5,24 +5,39 @@ class CommentForm extends React.Component {
     super();
 
     this.state = {
-      data: ''
+      author: '',
+      text: ''
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleAuthorChange = this.handleAuthorChange.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
   }
 
-  handleChange(event) {
+  handleAuthorChange(event) {
     this.setState({
-      data: event.target.value
+      author: event.target.value
+    });
+  }
+
+  handleTextChange(event) {
+    this.setState({
+      text: event.target.value
     });
   }
 
   render() {
     return (
-      <div>
-        <h1>{this.state.data}</h1>
-        <input onChange={this.handleChange} />
-      </div>
+      // <div>
+      //   <h1>{this.state.data}</h1>
+      //   <input onChange={this.handleChange} />
+      // </div>
+      <form>
+        <h1>{this.state.author}</h1>
+        <input type="text" placeholder="" onChange={this.handleAuthorChange} />
+        <h1>{this.state.text}</h1>
+        <input type="text" placeholder="" onChange={this.handleTextChange} />
+        <input type="submit" value="post" />
+      </form>
     );
   }
 }
