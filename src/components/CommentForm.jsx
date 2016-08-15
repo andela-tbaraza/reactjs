@@ -1,4 +1,6 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+
 
 class CommentForm extends React.Component {
   constructor() {
@@ -11,6 +13,7 @@ class CommentForm extends React.Component {
 
     this.handleAuthorChange = this.handleAuthorChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleAuthorChange(event) {
@@ -25,18 +28,30 @@ class CommentForm extends React.Component {
     });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    let author = this.state.author.trim();
+    let text = this.state.text.trim();
+    if (!author || !text) {
+      return;
+    }
+
+    this.props.onCommentSubmit({ author: author, text: text });
+    this.setState({ author: '', text: '' });
+  }
   render() {
     return (
       // <div>
       //   <h1>{this.state.data}</h1>
       //   <input onChange={this.handleChange} />
       // </div>
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <h1>{this.state.author}</h1>
-        <input type="text" placeholder="" onChange={this.handleAuthorChange} />
+        <input type="text" placeholder="" value={this.state.author} onChange={this.handleAuthorChange} />
         <h1>{this.state.text}</h1>
-        <input type="text" placeholder="" onChange={this.handleTextChange} />
-        <input type="submit" value="post" />
+        <input type="text" placeholder="" value={this.state.text} onChange={this.handleTextChange} />
+        <input type="submit" value="Post" />
+        {/*<RaisedButton label="Post" />*/}
       </form>
     );
   }

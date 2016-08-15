@@ -11,13 +11,28 @@ class CommentBox extends Component {
   loadCommentsFromServer() {
     $.ajax({
       url: this.props.url,
-      // datatype: json,
+      dataType: 'json',
       cache: false,
       success: function (data) {
         console.log(data)
         this.setState({
           data: data.items
         });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  }
+
+  handleCommentSubmit(comment) {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: comment,
+      success: function (data) {
+        this.setState({ data: data });
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -40,7 +55,7 @@ class CommentBox extends Component {
     return (
       <div>
         <CommentList data={this.state.data} />
-        <CommentForm />
+        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       </div>
     );
   }
